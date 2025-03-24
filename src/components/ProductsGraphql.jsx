@@ -8,7 +8,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 
-const Products = () => {
+const ProductsGraphql = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
@@ -70,7 +70,7 @@ const Products = () => {
 
 
 
-  const ShowProducts = () => {
+  const ShowProductsGraphql = () => {
     console.log(data);
     return (
       <>
@@ -136,11 +136,11 @@ const Products = () => {
           </div>
         </div>
         <div className="row justify-content-center">
-          {loading ? <Loading /> : <ShowProducts />}
+          {loading ? <Loading /> : <ShowProductsGraphql />}
         </div>
       </div>
     </>
   );
 };
 
-export default Products;
+export default ProductsGraphql;

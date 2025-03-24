@@ -21,9 +21,15 @@ import {
 } from "./pages";
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
+import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
+const client = new ApolloClient({uri: 'http://localhost:1337/graphql', cache: new InMemoryCache()})
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
+
 root.render(
+  <ApolloProvider client={client}>
   <BrowserRouter>
     <ScrollToTop>
       <Provider store={store}>
@@ -45,4 +51,5 @@ root.render(
     </ScrollToTop>
     <Toaster />
   </BrowserRouter>
+  </ApolloProvider>
 );

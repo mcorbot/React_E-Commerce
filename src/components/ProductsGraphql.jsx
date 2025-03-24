@@ -7,39 +7,30 @@ import "react-loading-skeleton/dist/skeleton.css";
 
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import { gql, useLazyQuery } from '@apollo/client';
 
 const ProductsGraphql = () => {
   const [data, setData] = useState([]);
   const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
+  const [getData] = useLazyQuery(GET_PRICELESS_CORGIS);
   let componentMounted = true;
 
-  const dispatch = useDispatch();
 
-  const addProduct = (product) => {
-    dispatch(addCart(product));
-  };
 
-  useEffect(() => {
-    const getProducts = async () => {
-      setLoading(true);
-      const response = await fetch("http://localhost:1337/api/products?populate=*");
-      if (componentMounted) {
-        const data1 = await response.clone().json();
-        setData(data1.data);
-        setLoading(false);
-        
-      }
-
-      return () => {
-        componentMounted = false;
-      };
-    };
-
-    getProducts();
+useEffect(() => {
+   getAllData();
 
   }, []);
 
+
+const getAllData = async () => {
+  const response = await getData();
+  setData(response.data.products);
+}
+
+
+  
   const Loading = () => {
     return (
       <>
@@ -71,7 +62,6 @@ const ProductsGraphql = () => {
 
 
   const ShowProductsGraphql = () => {
-    console.log(data);
     return (
       <>
   
@@ -111,10 +101,7 @@ const ProductsGraphql = () => {
                   </Link>
                   <button
                     className="btn btn-dark m-1"
-                    onClick={() => {
-                      toast.success("Added to cart");
-                      addProduct(product);
-                    }}
+
                   >
                     Add to Cart
                   </button>
@@ -136,11 +123,29 @@ const ProductsGraphql = () => {
           </div>
         </div>
         <div className="row justify-content-center">
-          {loading ? <Loading /> : <ShowProductsGraphql />}
+          {<ShowProductsGraphql />}
         </div>
       </div>
     </>
   );
+
 };
 
+export const GET_PRICELESS_CORGIS = gql`
+query PricelessCorgis {
+  products(
+ filters :{
+  price: {gt: 1000}
+ }
+){
+  productname
+  price
+  description
+  productimage {
+    documentId
+    url
+  }
+  productcode
+}
+}`;
 export default ProductsGraphql;

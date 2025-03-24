@@ -26,6 +26,7 @@ useEffect(() => {
 
 const getAllData = async () => {
   const response = await getData();
+  console.log(response)
   setData(response.data.products);
 }
 

@@ -22,7 +22,7 @@ import {
 import ScrollToTop from "./components/ScrollToTop";
 import { Toaster } from "react-hot-toast";
 import { ApolloClient, InMemoryCache, ApolloProvider, gql } from '@apollo/client';
-const client = new ApolloClient({uri: 'http://localhost:1337/graphql', cache: new InMemoryCache()})
+const client = new ApolloClient({uri: 'https://sacred-health-59ceaa35f5.strapiapp.com/graphql', cache: new InMemoryCache()})
 
 
 

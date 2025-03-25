@@ -23,7 +23,7 @@ const Products = () => {
   useEffect(() => {
     const getProducts = async () => {
       setLoading(true);
-      const response = await fetch("http://localhost:1337/api/products?populate=*");
+      const response = await fetch("https://sacred-health-59ceaa35f5.strapiapp.com/api/products?populate=*");
       if (componentMounted) {
         const data1 = await response.clone().json();
         setData(data1.data);
@@ -85,16 +85,16 @@ const Products = () => {
               <div className="card text-center h-100" key={product.productcode}>
                 <img
                   className="card-img-top p-3"
-                  src={product.productimage}
+                  src={product.productimage[0].url}
                   alt="Card"
                   height={300}
                 />
                 <div className="card-body">
                   <h5 className="card-title">
-                    {product.productname.substring(0, 12)}...
+                    {product.productname}...
                   </h5>
                   <p className="card-text">
-                    {product.description.substring(0, 90)}...
+                    {product.description}...
                   </p>
                 </div>
                 <ul className="list-group list-group-flush">

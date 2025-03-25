@@ -76,7 +76,7 @@ const getAllData = async () => {
               <div className="card text-center h-100" key={product.productcode}>
                 <img
                   className="card-img-top p-3"
-                  src={product.productimage}
+                  src={product.productimage[0].url}
                   alt="Card"
                   height={300}
                 />
